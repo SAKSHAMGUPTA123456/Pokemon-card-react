@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import { Fragment, useState } from 'react';
+import {FadeLoader} from 'react-spinners'
 import './input.css';
 import './output.css';
 import { useEffect } from 'react';
@@ -40,7 +41,13 @@ useEffect(()=>{
 fetchi()
 },[])
 if(oldload){
-  return <h1>LOADING.............</h1>
+  return <>
+  <div class="flex justify-center mt-14">
+  <FadeLoader
+  color="#5dacbe"
+  height={50}/></div>
+  <div class="flex justify-center mt-10">PLEASE WAIT WEBSITE IS LOADING................</div>
+  </>
 }
   return (
     <Fragment>  
