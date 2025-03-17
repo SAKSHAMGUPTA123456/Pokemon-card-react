@@ -8,6 +8,7 @@ function App() {
 const API="https://pokeapi.co/api/v2/pokemon"
 const [set,newpokemon]=useState([])
 const [oldmap,newmap]=useState([])
+const [oldload,newload]=useState(true)
 const fetchi=async()=>{
 const rt=await fetch(API)
 const data=await rt.json()
@@ -33,9 +34,14 @@ newmap(ert)
 }
 console.log(oldmap)
 useEffect(()=>{
+  setTimeout(() => {
+    newload(false)
+  },5000);
 fetchi()
 },[])
-
+if(oldload){
+  return <h1>LOADING.............</h1>
+}
   return (
     <Fragment>  
 <div class="flex justify-center">
