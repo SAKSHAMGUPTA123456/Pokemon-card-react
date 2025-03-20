@@ -10,7 +10,9 @@ const API="https://pokeapi.co/api/v2/pokemon"
 const [set,newpokemon]=useState([])
 const [oldmap,newmap]=useState([])
 const [oldload,newload]=useState(true)
+const [error,newapi]=useState(null)
 const fetchi=async()=>{
+  try{
 const rt=await fetch(API)
 const data=await rt.json()
 console.log(data.results)
@@ -23,7 +25,13 @@ const detailed=data.results.map(async(curr)=>{
 const final=await Promise.all(detailed)
 newpokemon(final)
 }
+catch(error){
+newapi(error)
+  console.log('hello')
+}
+}
 const enquire=(value)=>{
+
   const ert=set.filter((curr)=>{
   const rty=value.toLowerCase()
   if(curr.name.startsWith(rty)){
@@ -37,17 +45,20 @@ console.log(oldmap)
 useEffect(()=>{
   setTimeout(() => {
     newload(false)
-  },5000);
+  },3000);
 fetchi()
 },[])
 if(oldload){
-  return <>
+  return (<>
   <div class="flex justify-center mt-14">
   <FadeLoader
   color="#5dacbe"
   height={50}/></div>
   <div class="flex justify-center mt-10">PLEASE WAIT WEBSITE IS LOADING................</div>
-  </>
+  </>)
+}
+if(error){
+  return (<h1>sklsk</h1>)
 }
   return (
     <Fragment>  
